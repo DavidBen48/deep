@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>[CRITICAL ALERT] SYSTEM CORRUPTED</title>
+<style>
+  :root {
+    --bg-color: #050505;
+    --text-green: #00ff66;
+    --alert-red: #ff2a2a;
+    --warning-yellow: #ffcc00;
+    --dim-text: #4a6b53;
+    --code-color: #8899a6;
+    --border-color: #00ff6633;
+  }
+
+  body {
+    background-color: var(--bg-color);
+    color: var(--text-green);
+    font-family: 'Courier New', Courier, monospace;
+    margin: 0;
+    padding: 20px;
+    line-height: 1.4;
+  }
+
+  .container {
+    max-width: 680px;
+    margin: 0 auto;
+    background: rgba(10, 15, 10, 0.95);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 0 25px rgba(0, 255, 102, 0.15);
+    padding: 24px;
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Decorative CRT Scanlines */
+  .container::before {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    z-index: 2;
+    background-size: 100% 3px, 3px 100%;
+    pointer-events: none;
+  }
+
+  .header {
+    border-bottom: 1px solid var(--alert-red);
+    padding-bottom: 12px;
+    margin-bottom: 18px;
+  }
+
+  .alert-banner {
+    background-color: rgba(255, 42, 42, 0.15);
+    color: var(--alert-red);
+    border: 1px dashed var(--alert-red);
+    padding: 10px;
+    font-weight: bold;
+    text-align: center;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-size: 13px;
+    margin-bottom: 15px;
+  }
+
+  .ip-badge {
+    background-color: #1a0000;
+    color: #ff6666;
+    padding: 2px 6px;
+    border-radius: 2px;
+    font-weight: bold;
+  }
+
+  .meta-info {
+    font-size: 11px;
+    color: var(--dim-text);
+    margin-bottom: 15px;
+  }
+
+  .c-code-block {
+    background-color: #030804;
+    border-left: 2px solid var(--alert-red);
+    padding: 10px 14px;
+    font-size: 11px;
+    color: #a0b0a0;
+    margin: 15px 0;
+    overflow-x: auto;
+  }
+
+  .c-keyword { color: #ff5555; }
+  .c-type { color: #55ffff; }
+  .c-func { color: #ffff55; }
+  .c-comment { color: #555555; font-style: italic; }
+  .c-string { color: #ff77ff; }
+
+  .pgp-box {
+    background: #000000;
+    border: 1px solid #1a3320;
+    padding: 12px;
+    margin: 15px 0;
+    border-radius: 3px;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .copy-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+    border-bottom: 1px dashed #1a3320;
+  }
+
+  .copy-btn {
+    background: rgba(0, 255, 102, 0.1);
+    color: var(--text-green);
+    border: 1px solid var(--text-green);
+    padding: 6px 12px;
+    font-family: inherit;
+    font-size: 11px;
+    cursor: pointer;
+    text-transform: uppercase;
+    border-radius: 2px;
+    font-weight: bold;
+  }
+
+  .copy-btn:hover {
+    background: var(--text-green);
+    color: #000;
+  }
+
+  textarea.pgp-textarea {
+    width: 100%;
+    height: 180px;
+    background: #000000;
+    color: #00dd55;
+    border: none;
+    font-size: 10px;
+    font-family: monospace;
+    resize: none;
+    outline: none;
+    box-sizing: border-box;
+  }
+
+  .instruction-title {
+    color: var(--warning-yellow);
+    font-size: 13px;
+    font-weight: bold;
+    margin-top: 15px;
+  }
+
+  ol {
+    padding-left: 20px;
+    font-size: 12px;
+  }
+
+  li {
+    margin-bottom: 6px;
+  }
+
+  .clue-box {
+    border: 1px solid var(--warning-yellow);
+    background: rgba(255, 204, 0, 0.05);
+    padding: 10px 14px;
+    margin-top: 10px;
+    font-size: 12px;
+  }
+
+  .footer {
+    border-top: 1px solid #112211;
+    margin-top: 20px;
+    padding-top: 10px;
+    font-size: 9px;
+    color: #334433;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .glitch-text {
+    animation: pulseRed 2s infinite alternate;
+  }
+
+  @keyframes pulseRed {
+    0% { color: var(--alert-red); }
+    100% { color: #ff8888; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <div class="alert-banner glitch-text">
+      [!!!] SYSTEM BREACH DETECTED - LEVEL 5 CRITICAL [!!!]
+    </div>
+    <div class="meta-info">
+      <div>TIMESTAMP: <span>2026-10-06 17:51:28 UTC</span></div>
+      <div>TARGET DEVICE IP: <span class="ip-badge">192.168.0.181</span></div>
+      <div>SESSION ID: 0x8F92A-SYS-PROT-KERNEL_EXPLOIT</div>
+    </div>
+  </div>
+
+  <p>Attention target, your mail server credentials and memory sectors have been dumping to an external onion relay.</p>
+
+  <div class="instruction-title">&gt; KERNEL DUMP (exploit_payload.c)</div>
+  <div class="c-code-block">
+<span class="c-comment">// FORCED MEMORY INJECTION AT ADDRESS 0x7FFF89B2</span>
+<span class="c-keyword">#include</span> <span class="c-string">&lt;stdio.h&gt;</span>
+<span class="c-keyword">#include</span> <span class="c-string">&lt;stdlib.h&gt;</span>
+<span class="c-keyword">#include</span> <span class="c-string">&lt;string.h&gt;</span>
+
+<span class="c-type">typedef struct</span> {
+    <span class="c-type">char</span> user_email[64];
+    <span class="c-type">unsigned long</span> session_hash;
+    <span class="c-type">short</span> status_code;
+} <span class="c-type">TargetProfile</span>;
+
+<span class="c-type">void</span> <span class="c-func">corrupt_sector</span>(<span class="c-type">void</span>* memory_addr) {
+    <span class="c-type">char</span>* leak = (<span class="c-type">char</span>*)malloc(512);
+    <span class="c-func">memset</span>(leak, 0xDE, 512);
+    <span class="c-func">memcpy</span>(memory_addr, <span class="c-string">"\x7F\x45\x4C\x46\x02\x01\x01"</span>, 7);
+    <span class="c-func">printf</span>(<span class="c-string">"[WARNING] Memory dump forced at %p. Payload encrypted.\n"</span>, memory_addr);
+}
+  </div>
+
+  <p style="font-size: 12px; color: var(--alert-red);">
+    WARNING: Your local communication packet was intercepted. The payload payload_decrypter.pgp is encrypted using standard OpenPGP asymmetric keys.
+  </p>
+
+  <div class="instruction-title">&gt; ENCRYPTED DATA BLOCK</div>
+  <div class="pgp-box">
+    <div class="copy-bar">
+      <span style="font-size: 10px; color: var(--dim-text);">&gt; SELEÇÃO RÁPIDA / COPIAR</span>
+      <button class="copy-btn" id="copy-btn" onclick="copyPgpBlock()">[ COPIAR BLOCO PGP ]</button>
+    </div>
+    <textarea class="pgp-textarea" id="pgp-text" readonly onclick="this.select(); focusAndCopy();">-----BEGIN PGP MESSAGE-----
+
+jA0ECQMKI+O7YZxeAVL/0sBCAQDpf7EmYs2tM1Yx0t6juNoz9XLH3MFDd9pVyAzJ
+3emjHE9xba7Q4G1YrigI1oIifY9V3sU2EYmXfYNp89aUzYa+xKflzYlK92BEBOK5
+KYHRqiynNkhcixmVgU8iURnbZERqgqOrnLQKjxioESUqhb4i1rTX/YbThWxEOtEf
+kLuhCnf+VGhEcJdbhExAm9gXGw3LPGXxKL0w8odRRtLw6OH358KpdPl1zA/YYMyM
+9Pm++tVZXeJaFbEFr+dWcXDUvEmTY2BTk1WGCHGr/OnTsPKJh3yuWzBsb3+pmPhA
+2W+uZU0m1rfjgRKMjZ7q1/gp/hPyYr+plBLpGf+Az4knWiug
+=PX7o
+-----END PGP MESSAGE-----</textarea>
+  </div>
+
+  <div class="instruction-title">&gt; DECRYPTION PROTOCOL</div>
+  <ol>
+    <li>Clique no botão <strong>[ COPIAR BLOCO PGP ]</strong> acima (ou toque no texto para selecionar tudo).</li>
+    <li>Utilize um decodificador PGP online (ex: <strong>DevGLAN PGP Decryptor</strong> ou <strong>OpenPGP Online</strong>).</li>
+    <li>Use a chave de segurança abaixo para desbloquear a mensagem.</li>
+  </ol>
+
+  <div class="clue-box">
+    <strong style="color: var(--warning-yellow);">&gt; PASSPHRASE CLUE:</strong><br>
+    <em>Your data will be leaked within 24 hours. Please decrypt the message to follow the step-by-step instructions. The required access password is 30082025; it's a random password that will last until October 8, 2026.</em><br>
+    <small style="color: var(--dim-text);">(Formato: tudo em minúsculas, sem espaços nem acentos)</small>
+  </div>
+
+  <div class="footer">
+    <span>SYSTEM LOG: ERR_SEGMENTATION_FAULT_0x00f</span>
+    <span>STATUS: AWAITING_PASSPHRASE</span>
+  </div>
+</div>
+
+<script>
+  function focusAndCopy() {
+    const textArea = document.getElementById('pgp-text');
+    textArea.select();
+    textArea.setSelectionRange(0, 99999);
+  }
+
+  function copyPgpBlock() {
+    const textArea = document.getElementById('pgp-text');
+    textArea.select();
+    textArea.setSelectionRange(0, 99999);
+    
+    let copied = false;
+    try {
+      copied = document.execCommand('copy');
+    } catch (err) {
+      copied = false;
+    }
+
+    if (!copied && navigator.clipboard) {
+      navigator.clipboard.writeText(textArea.value);
+      copied = true;
+    }
+
+    const btn = document.getElementById('copy-btn');
+    btn.innerText = '[ COPIADO COM SUCESSO! ]';
+    btn.style.backgroundColor = '#00ff66';
+    btn.style.color = '#000';
+    setTimeout(() => {
+      btn.innerText = '[ COPIAR BLOCO PGP ]';
+      btn.style.backgroundColor = 'rgba(0, 255, 102, 0.1)';
+      btn.style.color = 'var(--text-green)';
+    }, 2500);
+  }
+</script>
+
+</body>
+</html>
